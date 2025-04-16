@@ -1,0 +1,19 @@
+
+{
+  "appId": "app.lovable.14c2306968274ed68ba9f2624e87978b",
+  "appName": "Lanka Explore Journey",
+  "webDir": "dist",
+  "server": {
+    "url": "https://14c23069-6827-4ed6-8ba9-f2624e87978b.lovableproject.com?forceHideBadge=true",
+    "cleartext": true
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 3000,
+      "launchAutoHide": true,
+      "backgroundColor": "#ffffffff",
+      "androidSplashResourceName": "splash",
+      "androidScaleType": "CENTER_CROP"
+    }
+  }
+}

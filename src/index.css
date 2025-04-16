@@ -13,41 +13,44 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* LankaGo Brand Colors */
+    --primary: 249 82% 74%; /* #9b87f5 - Purple */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
+    --secondary: 193 91% 56%; /* #33C3F0 - Sky Blue */
     --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 25 95% 53%; /* #F97316 - Bright Orange */
+    --accent-foreground: 0 0% 100%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 46%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 249 82% 74%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Additional LankaGo Colors */
+    --lanka-purple: 249 82% 74%; /* #9b87f5 */
+    --lanka-dark-purple: 261 36% 54%; /* #7E69AB */
+    --lanka-orange: 25 95% 53%; /* #F97316 */
+    --lanka-blue: 193 91% 56%; /* #33C3F0 */
+    --lanka-gray: 214 4% 57%; /* #8E9196 */
+    --lanka-dark: 218 26% 14%; /* #1A1F2C */
+    --lanka-light: 252 96% 97%; /* #F1F0FB */
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 

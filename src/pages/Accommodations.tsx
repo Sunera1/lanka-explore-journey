@@ -159,7 +159,7 @@ const Accommodations = () => {
                         <SelectValue placeholder="All types" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">All types</SelectItem>
+                        <SelectItem value="all">All types</SelectItem>
                         <SelectItem value="Hotel">Hotel</SelectItem>
                         <SelectItem value="Resort">Resort</SelectItem>
                         <SelectItem value="Guesthouse">Guesthouse</SelectItem>

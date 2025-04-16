@@ -22,6 +22,6 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    outDir: 'dist',  // Ensure output matches Capacitor config
+    outDir: 'dist',  // Match Capacitor config
   }
 }));

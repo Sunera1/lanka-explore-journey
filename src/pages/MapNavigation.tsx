@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -8,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/use-toast";
+import { Switch } from "@/components/ui/switch";
 import { 
   MapPinIcon, 
   SearchIcon, 
@@ -15,7 +17,8 @@ import {
   Footprints as WalkIcon, 
   Bus as BusIcon, 
   Car as CarIcon, 
-  XIcon 
+  XIcon,
+  StreetView
 } from "lucide-react";
 
 interface POI {
@@ -81,6 +84,7 @@ const MapNavigation = () => {
   const [selectedPOI, setSelectedPOI] = useState<POI | null>(null);
   const [transportMode, setTransportMode] = useState<TransportMode>("walking");
   const [showDirections, setShowDirections] = useState(false);
+  const [enableStreetView, setEnableStreetView] = useState(false);
   
   const { toast } = useToast();
 
@@ -147,6 +151,18 @@ const MapNavigation = () => {
     filterPOIs();
   }, [selectedCategory]);
 
+  const toggleStreetView = () => {
+    const newState = !enableStreetView;
+    setEnableStreetView(newState);
+    
+    if (newState) {
+      toast({
+        title: "Street View Enabled",
+        description: "Click on any marker or use the Street View control to open panorama view",
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -189,9 +205,23 @@ const MapNavigation = () => {
                   
                   <div className="flex justify-between items-center mb-3">
                     <h3 className="font-medium">Nearby Places</h3>
-                    <Button variant="ghost" size="sm" onClick={resetMapView}>
-                      <CompassIcon className="h-4 w-4 mr-1" /> Reset View
-                    </Button>
+                    <div className="flex gap-2">
+                      <Button variant="ghost" size="sm" onClick={resetMapView}>
+                        <CompassIcon className="h-4 w-4 mr-1" /> Reset View
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  {/* Street View toggle */}
+                  <div className="flex items-center justify-between mb-4 p-2 bg-muted/50 rounded-md">
+                    <div className="flex items-center">
+                      <StreetView className="h-4 w-4 mr-2" />
+                      <span className="text-sm font-medium">Street View</span>
+                    </div>
+                    <Switch 
+                      checked={enableStreetView} 
+                      onCheckedChange={toggleStreetView}
+                    />
                   </div>
                   
                   {pois.length === 0 ? (
@@ -321,6 +351,7 @@ const MapNavigation = () => {
                       destination: selectedPOI.coordinates,
                       mode: transportMode
                     } : undefined}
+                    enableStreetView={enableStreetView}
                   />
                 </CardContent>
               </Card>

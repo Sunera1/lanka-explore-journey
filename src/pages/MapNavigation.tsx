@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -18,7 +17,7 @@ import {
   Bus as BusIcon, 
   Car as CarIcon, 
   XIcon,
-  StreetView
+  MapIcon
 } from "lucide-react";
 
 interface POI {
@@ -215,7 +214,7 @@ const MapNavigation = () => {
                   {/* Street View toggle */}
                   <div className="flex items-center justify-between mb-4 p-2 bg-muted/50 rounded-md">
                     <div className="flex items-center">
-                      <StreetView className="h-4 w-4 mr-2" />
+                      <MapIcon className="h-4 w-4 mr-2" />
                       <span className="text-sm font-medium">Street View</span>
                     </div>
                     <Switch 

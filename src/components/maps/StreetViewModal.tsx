@@ -72,9 +72,9 @@ export function StreetViewModal({ position, isOpen, onClose }: StreetViewModalPr
   );
 }
 
-// Add typings for Google Maps API if not already defined
+// Add correct typings for Google Maps API
 declare global {
   interface Window {
-    google: any;
+    google?: any;
   }
 }

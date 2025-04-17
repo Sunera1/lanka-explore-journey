@@ -297,7 +297,7 @@ export function SimpleMap({
   );
 }
 
-// Add typings for Google Maps API
+// Add correct typings for Google Maps API
 declare global {
   interface Window {
     google?: any;

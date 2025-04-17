@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPinIcon, StarIcon, ArrowLeftIcon, BedDoubleIcon, WifiIcon, CoffeeIcon, ParkingIcon } from "lucide-react";
+import { MapPinIcon, StarIcon, ArrowLeftIcon, BedDoubleIcon, WifiIcon, CoffeeIcon, ParkingCircleIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 
 // In a real app, this data would come from an API
@@ -152,7 +152,7 @@ const AccommodationDetail = () => {
                       ) : amenity.includes("Restaurant") || amenity.includes("Breakfast") ? (
                         <CoffeeIcon className="h-4 w-4 text-primary" />
                       ) : amenity.includes("Parking") ? (
-                        <ParkingIcon className="h-4 w-4 text-primary" />
+                        <ParkingCircleIcon className="h-4 w-4 text-primary" />
                       ) : (
                         <div className="w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center">
                           <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
@@ -202,3 +202,4 @@ const AccommodationDetail = () => {
 };
 
 export default AccommodationDetail;
+

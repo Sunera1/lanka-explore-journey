@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -9,7 +8,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/use-toast";
-import { MapPinIcon, SearchIcon, CompassIcon, WalkIcon, BusIcon, CarIcon, XIcon } from "lucide-react";
+import { 
+  MapPinIcon, 
+  SearchIcon, 
+  CompassIcon, 
+  Footprints as WalkIcon, 
+  Bus as BusIcon, 
+  Car as CarIcon, 
+  XIcon 
+} from "lucide-react";
 
 interface POI {
   id: string;
@@ -20,7 +27,6 @@ interface POI {
   description?: string;
 }
 
-// Sample data for nearby points of interest
 const nearbyPOIs: POI[] = [
   {
     id: "1",
@@ -64,11 +70,10 @@ const nearbyPOIs: POI[] = [
   }
 ];
 
-// Transportation modes
 type TransportMode = "walking" | "public" | "driving";
 
 const MapNavigation = () => {
-  const [center, setCenter] = useState<[number, number]>([6.9271, 79.8425]); // Default: Colombo
+  const [center, setCenter] = useState<[number, number]>([6.9271, 79.8425]);
   const [zoom, setZoom] = useState(13);
   const [pois, setPois] = useState<POI[]>(nearbyPOIs);
   const [searchQuery, setSearchQuery] = useState("");
@@ -79,7 +84,6 @@ const MapNavigation = () => {
   
   const { toast } = useToast();
 
-  // Filter POIs based on search query and category
   const filterPOIs = () => {
     let filtered = nearbyPOIs;
     
@@ -99,13 +103,11 @@ const MapNavigation = () => {
     setPois(filtered);
   };
 
-  // Handle search
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     filterPOIs();
   };
 
-  // Get directions
   const getDirections = () => {
     if (!selectedPOI) return;
     
@@ -116,19 +118,16 @@ const MapNavigation = () => {
     });
   };
 
-  // Clear selected POI
   const clearSelection = () => {
     setSelectedPOI(null);
     setShowDirections(false);
   };
   
-  // Reset map view
   const resetMapView = () => {
     setCenter([6.9271, 79.8425]);
     setZoom(13);
   };
 
-  // Category icon selector
   const getCategoryIcon = (category: string) => {
     switch(category) {
       case "attraction":
@@ -144,7 +143,6 @@ const MapNavigation = () => {
     }
   };
 
-  // Effect to filter POIs when category changes
   useEffect(() => {
     filterPOIs();
   }, [selectedCategory]);
@@ -163,7 +161,6 @@ const MapNavigation = () => {
       <main className="flex-1 py-8">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Left sidebar with search, filters, and POI list */}
             <div className="md:col-span-1 space-y-6">
               <Card>
                 <CardContent className="p-6">
@@ -236,75 +233,71 @@ const MapNavigation = () => {
                 </CardContent>
               </Card>
               
-              {/* Directions panel */}
-              {selectedPOI && (
-                <Card>
-                  <CardHeader className="p-4 pb-2 flex flex-row items-center justify-between">
-                    <CardTitle className="text-base">Directions</CardTitle>
-                    <Button variant="ghost" size="icon" onClick={clearSelection}>
-                      <XIcon className="h-4 w-4" />
-                    </Button>
-                  </CardHeader>
-                  <CardContent className="p-4 pt-0">
-                    <div className="mb-4">
-                      <p className="font-medium">{selectedPOI.name}</p>
-                      <div className="text-sm text-muted-foreground flex items-center mt-1">
-                        <MapPinIcon className="h-3 w-3 mr-1" />
-                        {selectedPOI.location}
-                      </div>
+              <Card>
+                <CardHeader className="p-4 pb-2 flex flex-row items-center justify-between">
+                  <CardTitle className="text-base">Directions</CardTitle>
+                  <Button variant="ghost" size="icon" onClick={clearSelection}>
+                    <XIcon className="h-4 w-4" />
+                  </Button>
+                </CardHeader>
+                <CardContent className="p-4 pt-0">
+                  <div className="mb-4">
+                    <p className="font-medium">{selectedPOI?.name}</p>
+                    <div className="text-sm text-muted-foreground flex items-center mt-1">
+                      <MapPinIcon className="h-3 w-3 mr-1" />
+                      {selectedPOI?.location}
                     </div>
-                    
-                    <div className="flex gap-2 mb-4">
-                      <Button 
-                        variant={transportMode === "walking" ? "default" : "outline"} 
-                        size="sm" 
-                        className="flex-1"
-                        onClick={() => setTransportMode("walking")}
-                      >
-                        <WalkIcon className="h-4 w-4 mr-1.5" /> Walk
-                      </Button>
-                      <Button 
-                        variant={transportMode === "public" ? "default" : "outline"} 
-                        size="sm" 
-                        className="flex-1"
-                        onClick={() => setTransportMode("public")}
-                      >
-                        <BusIcon className="h-4 w-4 mr-1.5" /> Public
-                      </Button>
-                      <Button 
-                        variant={transportMode === "driving" ? "default" : "outline"} 
-                        size="sm" 
-                        className="flex-1"
-                        onClick={() => setTransportMode("driving")}
-                      >
-                        <CarIcon className="h-4 w-4 mr-1.5" /> Drive
-                      </Button>
-                    </div>
-                    
-                    <Button className="w-full" onClick={getDirections}>
-                      Get Directions
+                  </div>
+                  
+                  <div className="flex gap-2 mb-4">
+                    <Button 
+                      variant={transportMode === "walking" ? "default" : "outline"} 
+                      size="sm" 
+                      className="flex-1"
+                      onClick={() => setTransportMode("walking")}
+                    >
+                      <WalkIcon className="h-4 w-4 mr-1.5" /> Walk
                     </Button>
+                    <Button 
+                      variant={transportMode === "public" ? "default" : "outline"} 
+                      size="sm" 
+                      className="flex-1"
+                      onClick={() => setTransportMode("public")}
+                    >
+                      <BusIcon className="h-4 w-4 mr-1.5" /> Public
+                    </Button>
+                    <Button 
+                      variant={transportMode === "driving" ? "default" : "outline"} 
+                      size="sm" 
+                      className="flex-1"
+                      onClick={() => setTransportMode("driving")}
+                    >
+                      <CarIcon className="h-4 w-4 mr-1.5" /> Drive
+                    </Button>
+                  </div>
+                  
+                  <Button className="w-full" onClick={getDirections}>
+                    Get Directions
+                  </Button>
 
-                    {showDirections && (
-                      <div className="mt-4 bg-muted/50 p-3 rounded-md text-sm">
-                        <p className="font-medium mb-1">Estimated Time: 15 minutes</p>
-                        <ol className="space-y-2 pl-4 list-decimal">
-                          <li>Head south on Main Street for 200m</li>
-                          <li>Turn right onto Temple Road</li>
-                          <li>Continue for 400m</li>
-                          <li>Destination will be on your left</li>
-                        </ol>
-                        <p className="mt-3 text-xs text-muted-foreground">
-                          Note: This is simulated direction data
-                        </p>
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              )}
+                  {showDirections && (
+                    <div className="mt-4 bg-muted/50 p-3 rounded-md text-sm">
+                      <p className="font-medium mb-1">Estimated Time: 15 minutes</p>
+                      <ol className="space-y-2 pl-4 list-decimal">
+                        <li>Head south on Main Street for 200m</li>
+                        <li>Turn right onto Temple Road</li>
+                        <li>Continue for 400m</li>
+                        <li>Destination will be on your left</li>
+                      </ol>
+                      <p className="mt-3 text-xs text-muted-foreground">
+                        Note: This is simulated direction data
+                      </p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
             </div>
             
-            {/* Main map area */}
             <div className="md:col-span-2">
               <Card className="overflow-hidden">
                 <CardContent className="p-0">
@@ -317,7 +310,6 @@ const MapNavigation = () => {
                         title: poi.name,
                         popup: `<b>${poi.name}</b><br>${poi.location}<br><i>${poi.description || ''}</i>`
                       })),
-                      // Current location marker
                       {
                         position: [6.9165, 79.8610],
                         title: "Your Location",
@@ -333,7 +325,6 @@ const MapNavigation = () => {
                 </CardContent>
               </Card>
               
-              {/* Location-based suggestions */}
               <div className="mt-6">
                 <h2 className="text-xl font-semibold mb-3">Suggestions Near You</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

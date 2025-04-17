@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import {
   NavigationMenu,
@@ -18,7 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   MenuIcon,
@@ -31,7 +30,7 @@ import {
 } from "lucide-react";
 
 export function Navbar() {
-  const isMobile = useMobile();
+  const isMobile = useIsMobile();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">

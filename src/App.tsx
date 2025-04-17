@@ -14,6 +14,10 @@ import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import Account from "./pages/Account";
 
+// Create destination detail page route
+import DestinationDetail from "./pages/DestinationDetail";
+import AccommodationDetail from "./pages/AccommodationDetail";
+
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -26,12 +30,13 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/destinations" element={<Destinations />} />
+            <Route path="/destination/:id" element={<DestinationDetail />} />
             <Route path="/accommodations" element={<Accommodations />} />
+            <Route path="/accommodation/:id" element={<AccommodationDetail />} />
             <Route path="/transport" element={<Transport />} />
             <Route path="/emergency" element={<Emergency />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/account" element={<Account />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </TooltipProvider>

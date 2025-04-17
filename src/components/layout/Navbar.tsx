@@ -12,12 +12,15 @@ import {
   PhoneIcon,
   MenuIcon,
   SearchIcon,
-  XIcon
+  XIcon,
+  UserIcon
 } from "lucide-react";
 
 export function Navbar() {
   const isMobile = useIsMobile();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // This would be replaced with actual auth state
+  const [isAuthenticated] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -65,6 +68,18 @@ export function Navbar() {
             <SearchIcon className="h-5 w-5" />
           </Button>
           
+          {isAuthenticated ? (
+            <Button variant="ghost" size="icon" className="rounded-full" asChild>
+              <Link to="/account">
+                <UserIcon className="h-5 w-5" />
+              </Link>
+            </Button>
+          ) : (
+            <Button variant="outline" size={isMobile ? "sm" : "default"} asChild>
+              <Link to="/auth">Sign In</Link>
+            </Button>
+          )}
+          
           {isMobile && (
             <Button variant="ghost" size="icon" onClick={toggleMenu}>
               {isMenuOpen ? <XIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
@@ -100,6 +115,18 @@ export function Navbar() {
               <PhoneIcon className="h-5 w-5 text-primary" />
               <span>Emergency</span>
             </Link>
+            {!isAuthenticated && (
+              <Link to="/auth" className="flex items-center gap-2 p-2 hover:bg-muted rounded-md" onClick={toggleMenu}>
+                <UserIcon className="h-5 w-5 text-primary" />
+                <span>Sign In</span>
+              </Link>
+            )}
+            {isAuthenticated && (
+              <Link to="/account" className="flex items-center gap-2 p-2 hover:bg-muted rounded-md" onClick={toggleMenu}>
+                <UserIcon className="h-5 w-5 text-primary" />
+                <span>My Account</span>
+              </Link>
+            )}
           </nav>
         </div>
       )}

@@ -16,6 +16,7 @@ import Account from "./pages/Account";
 import DestinationDetail from "./pages/DestinationDetail";
 import AccommodationDetail from "./pages/AccommodationDetail";
 import MapNavigation from "./pages/MapNavigation";
+import TripPlanner from "./pages/TripPlanner";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App = () => {
             <Route path="/auth" element={<Auth />} />
             <Route path="/account" element={<Account />} />
             <Route path="/maps" element={<MapNavigation />} />
+            <Route path="/trip-planner" element={<TripPlanner />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </TooltipProvider>

@@ -13,10 +13,9 @@ import Emergency from "./pages/Emergency";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import Account from "./pages/Account";
-
-// Create destination detail page route
 import DestinationDetail from "./pages/DestinationDetail";
 import AccommodationDetail from "./pages/AccommodationDetail";
+import MapNavigation from "./pages/MapNavigation";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +36,7 @@ const App = () => {
             <Route path="/emergency" element={<Emergency />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/account" element={<Account />} />
+            <Route path="/maps" element={<MapNavigation />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </TooltipProvider>

@@ -1,135 +1,207 @@
 
 import { Link } from "react-router-dom";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
-import { 
-  MapIcon, 
-  HomeIcon,
-  BedDoubleIcon,
-  BusIcon,
-  PhoneIcon,
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useMobile } from "@/hooks/use-mobile";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
   MenuIcon,
-  SearchIcon,
-  XIcon,
-  UserIcon
+  HomeIcon,
+  MapIcon,
+  BedIcon,
+  BusIcon,
+  AlertCircleIcon,
+  UserIcon,
 } from "lucide-react";
 
 export function Navbar() {
-  const isMobile = useIsMobile();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // This would be replaced with actual auth state
-  const [isAuthenticated] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const isMobile = useMobile();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="bg-primary rounded-full p-1">
-              <MapIcon className="h-6 w-6 text-primary-foreground" />
-            </div>
-            <span className="hidden sm:inline-block font-bold text-xl">LankaGo</span>
+        <div className="flex items-center gap-2 mr-4">
+          <Link to="/" className="font-bold text-xl">
+            Lanka <span className="text-primary">Explorer</span>
           </Link>
         </div>
-
-        {!isMobile ? (
-          <nav className="flex items-center gap-4">
-            <Link to="/" className="text-sm font-medium flex items-center gap-1 hover:text-primary transition-colors">
-              <HomeIcon className="h-4 w-4" />
-              <span>Home</span>
-            </Link>
-            <Link to="/destinations" className="text-sm font-medium flex items-center gap-1 hover:text-primary transition-colors">
-              <MapIcon className="h-4 w-4" />
-              <span>Explore</span>
-            </Link>
-            <Link to="/accommodations" className="text-sm font-medium flex items-center gap-1 hover:text-primary transition-colors">
-              <BedDoubleIcon className="h-4 w-4" />
-              <span>Stay</span>
-            </Link>
-            <Link to="/transport" className="text-sm font-medium flex items-center gap-1 hover:text-primary transition-colors">
-              <BusIcon className="h-4 w-4" />
-              <span>Transport</span>
-            </Link>
-            <Link to="/emergency" className="text-sm font-medium flex items-center gap-1 hover:text-primary transition-colors">
-              <PhoneIcon className="h-4 w-4" />
-              <span>Emergency</span>
-            </Link>
+        {isMobile ? (
+          <MobileNav />
+        ) : (
+          <nav className="flex items-center space-x-4 lg:space-x-6">
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild>
+                    <Link
+                      to="/"
+                      className="text-sm font-medium transition-colors hover:text-primary"
+                    >
+                      Home
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild>
+                    <Link
+                      to="/destinations"
+                      className="text-sm font-medium transition-colors hover:text-primary"
+                    >
+                      Destinations
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild>
+                    <Link
+                      to="/accommodations"
+                      className="text-sm font-medium transition-colors hover:text-primary"
+                    >
+                      Accommodations
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild>
+                    <Link
+                      to="/transport"
+                      className="text-sm font-medium transition-colors hover:text-primary"
+                    >
+                      Transport
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild>
+                    <Link
+                      to="/maps"
+                      className="text-sm font-medium transition-colors hover:text-primary"
+                    >
+                      Maps
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild>
+                    <Link
+                      to="/emergency"
+                      className="text-sm font-medium transition-colors hover:text-primary"
+                    >
+                      Emergency
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
           </nav>
-        ) : null}
+        )}
 
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" className="text-muted-foreground">
-            <SearchIcon className="h-5 w-5" />
-          </Button>
-          
-          {isAuthenticated ? (
-            <Button variant="ghost" size="icon" className="rounded-full" asChild>
-              <Link to="/account">
-                <UserIcon className="h-5 w-5" />
-              </Link>
-            </Button>
-          ) : (
-            <Button variant="outline" size={isMobile ? "sm" : "default"} asChild>
-              <Link to="/auth">Sign In</Link>
-            </Button>
-          )}
-          
-          {isMobile && (
-            <Button variant="ghost" size="icon" onClick={toggleMenu}>
-              {isMenuOpen ? <XIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
-            </Button>
-          )}
+          <UserNav />
         </div>
       </div>
-
-      {/* Mobile menu */}
-      {isMobile && (
-        <div className={cn(
-          "fixed inset-x-0 top-16 bg-background border-b p-4 transition-all duration-300 ease-in-out transform",
-          isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
-        )}>
-          <nav className="flex flex-col space-y-4">
-            <Link to="/" className="flex items-center gap-2 p-2 hover:bg-muted rounded-md" onClick={toggleMenu}>
-              <HomeIcon className="h-5 w-5 text-primary" />
-              <span>Home</span>
-            </Link>
-            <Link to="/destinations" className="flex items-center gap-2 p-2 hover:bg-muted rounded-md" onClick={toggleMenu}>
-              <MapIcon className="h-5 w-5 text-primary" />
-              <span>Explore</span>
-            </Link>
-            <Link to="/accommodations" className="flex items-center gap-2 p-2 hover:bg-muted rounded-md" onClick={toggleMenu}>
-              <BedDoubleIcon className="h-5 w-5 text-primary" />
-              <span>Stay</span>
-            </Link>
-            <Link to="/transport" className="flex items-center gap-2 p-2 hover:bg-muted rounded-md" onClick={toggleMenu}>
-              <BusIcon className="h-5 w-5 text-primary" />
-              <span>Transport</span>
-            </Link>
-            <Link to="/emergency" className="flex items-center gap-2 p-2 hover:bg-muted rounded-md" onClick={toggleMenu}>
-              <PhoneIcon className="h-5 w-5 text-primary" />
-              <span>Emergency</span>
-            </Link>
-            {!isAuthenticated && (
-              <Link to="/auth" className="flex items-center gap-2 p-2 hover:bg-muted rounded-md" onClick={toggleMenu}>
-                <UserIcon className="h-5 w-5 text-primary" />
-                <span>Sign In</span>
-              </Link>
-            )}
-            {isAuthenticated && (
-              <Link to="/account" className="flex items-center gap-2 p-2 hover:bg-muted rounded-md" onClick={toggleMenu}>
-                <UserIcon className="h-5 w-5 text-primary" />
-                <span>My Account</span>
-              </Link>
-            )}
-          </nav>
-        </div>
-      )}
     </header>
+  );
+}
+
+function MobileNav() {
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button variant="outline" size="icon">
+          <MenuIcon className="h-5 w-5" />
+          <span className="sr-only">Toggle menu</span>
+        </Button>
+      </SheetTrigger>
+      <SheetContent side="left">
+        <div className="grid gap-2 py-6">
+          <Link
+            to="/"
+            className="flex items-center gap-2 px-2 py-1 text-lg font-semibold"
+          >
+            <HomeIcon className="h-5 w-5" />
+            Home
+          </Link>
+          <Link
+            to="/destinations"
+            className="flex items-center gap-2 px-2 py-1 text-lg font-semibold"
+          >
+            <MapIcon className="h-5 w-5" />
+            Destinations
+          </Link>
+          <Link
+            to="/accommodations"
+            className="flex items-center gap-2 px-2 py-1 text-lg font-semibold"
+          >
+            <BedIcon className="h-5 w-5" />
+            Accommodations
+          </Link>
+          <Link
+            to="/transport"
+            className="flex items-center gap-2 px-2 py-1 text-lg font-semibold"
+          >
+            <BusIcon className="h-5 w-5" />
+            Transport
+          </Link>
+          <Link
+            to="/maps"
+            className="flex items-center gap-2 px-2 py-1 text-lg font-semibold"
+          >
+            <MapIcon className="h-5 w-5" />
+            Maps
+          </Link>
+          <Link
+            to="/emergency"
+            className="flex items-center gap-2 px-2 py-1 text-lg font-semibold"
+          >
+            <AlertCircleIcon className="h-5 w-5" />
+            Emergency
+          </Link>
+        </div>
+      </SheetContent>
+    </Sheet>
+  );
+}
+
+function UserNav() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" className="relative h-9 w-9 rounded-full">
+          <Avatar className="h-9 w-9">
+            <AvatarImage src="/placeholder.svg" alt="User" />
+            <AvatarFallback>
+              <UserIcon className="h-5 w-5" />
+            </AvatarFallback>
+          </Avatar>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56" align="end" forceMount>
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <Link to="/account">
+          <DropdownMenuItem>Profile</DropdownMenuItem>
+        </Link>
+        <Link to="/auth">
+          <DropdownMenuItem>Login / Register</DropdownMenuItem>
+        </Link>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

@@ -1,5 +1,5 @@
 
-import { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { XIcon } from 'lucide-react';
 

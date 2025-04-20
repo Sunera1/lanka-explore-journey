@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -17,7 +16,7 @@ import {
   GlobeIcon,
   BedIcon,
   UtensilsIcon,
-  MuseumIcon,
+  LandmarkIcon,
   DollarSignIcon
 } from "lucide-react";
 import { TripList } from "@/components/trip/TripList";
@@ -32,7 +31,6 @@ const TripPlanner = () => {
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
   
-  // Sample trip data
   const [trips, setTrips] = useState<Trip[]>([
     {
       id: "trip-1",
@@ -322,7 +320,6 @@ const TripPlanner = () => {
 
 export default TripPlanner;
 
-// Types for Trip Planner
 export interface Trip {
   id: string;
   name: string;
